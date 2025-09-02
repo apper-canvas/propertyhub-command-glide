@@ -1,17 +1,20 @@
-import React from "react";
+import React, { memo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 import Badge from "@/components/atoms/Badge";
 import { formatPrice, formatSquareFeet, getPropertyTypeLabel } from "@/utils/formatters";
+const PropertyCard = memo(({ property, onSave, isSaved = false }) => {
+  const handleSaveClick = useCallback((e) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    if (property?.Id && onSave) {
+      onSave(property.Id);
+    }
+  }, [property?.Id, onSave]);
 
-const PropertyCard = ({ property, onSave, isSaved = false }) => {
-  const handleSaveClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    onSave(property.Id);
-  };
+  if (!property) return null;
 
   return (
     <motion.div
@@ -19,12 +22,15 @@ const PropertyCard = ({ property, onSave, isSaved = false }) => {
       animate={{ opacity: 1, y: 0 }}
       className="property-card bg-white rounded-lg shadow-card hover:shadow-card-hover overflow-hidden group"
     >
-      <Link to={`/property/${property.Id}`}>
+<Link to={`/property/${property.Id}`}>
         <div className="relative">
           <img
-            src={property.images[0]}
-            alt={property.title}
+            src={property.images?.[0] || '/placeholder-property.jpg'}
+            alt={property.title || 'Property image'}
             className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            onError={(e) => {
+              e.target.src = '/placeholder-property.jpg';
+            }}
           />
           <div className="absolute top-3 left-3">
             <Badge variant="primary" className="font-semibold">
@@ -83,8 +89,10 @@ const PropertyCard = ({ property, onSave, isSaved = false }) => {
           </div>
         </div>
       </Link>
-    </motion.div>
+</motion.div>
   );
-};
+});
+
+PropertyCard.displayName = 'PropertyCard';
 
 export default PropertyCard;

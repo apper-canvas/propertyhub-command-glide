@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import PropertyCard from "@/components/molecules/PropertyCard";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
-import Empty from "@/components/ui/Empty";
-import ApperIcon from "@/components/ApperIcon";
-import Select from "@/components/atoms/Select";
 import { propertyService } from "@/services/api/propertyService";
 import { savedService } from "@/services/api/savedService";
 import { toast } from "react-toastify";
+import ApperIcon from "@/components/ApperIcon";
+import PropertyCard from "@/components/molecules/PropertyCard";
+import Error from "@/components/ui/Error";
+import Empty from "@/components/ui/Empty";
+import Loading from "@/components/ui/Loading";
+import Select from "@/components/atoms/Select";
 
 const PropertyGrid = ({ filters = {}, viewMode = "grid" }) => {
   const [properties, setProperties] = useState([]);
@@ -17,14 +17,14 @@ const PropertyGrid = ({ filters = {}, viewMode = "grid" }) => {
   const [savedProperties, setSavedProperties] = useState([]);
   const [sortBy, setSortBy] = useState("newest");
 
-  useEffect(() => {
+useEffect(() => {
     loadProperties();
     loadSavedProperties();
   }, [filters]);
 
   useEffect(() => {
     sortProperties();
-  }, [sortBy, properties]);
+  }, [sortBy]);
 
   const loadProperties = async () => {
     setLoading(true);
@@ -55,27 +55,33 @@ const PropertyGrid = ({ filters = {}, viewMode = "grid" }) => {
     }
   };
 
-  const sortProperties = () => {
+const sortProperties = () => {
+    if (!properties || properties.length === 0) return;
+    
     const sorted = [...properties];
     
     switch (sortBy) {
       case "price-low":
-        sorted.sort((a, b) => a.price - b.price);
+        sorted.sort((a, b) => (a.price || 0) - (b.price || 0));
         break;
       case "price-high":
-        sorted.sort((a, b) => b.price - a.price);
+        sorted.sort((a, b) => (b.price || 0) - (a.price || 0));
         break;
       case "beds-high":
-        sorted.sort((a, b) => b.bedrooms - a.bedrooms);
+        sorted.sort((a, b) => (b.bedrooms || 0) - (a.bedrooms || 0));
         break;
       case "sqft-high":
-        sorted.sort((a, b) => b.squareFeet - a.squareFeet);
+        sorted.sort((a, b) => (b.squareFeet || 0) - (a.squareFeet || 0));
         break;
       case "newest":
       default:
-        sorted.sort((a, b) => new Date(b.listingDate) - new Date(a.listingDate));
+        sorted.sort((a, b) => {
+          const dateA = a.listingDate ? new Date(a.listingDate) : new Date(0);
+          const dateB = b.listingDate ? new Date(b.listingDate) : new Date(0);
+          return dateB - dateA;
+        });
         break;
-    }
+}
     
     setProperties(sorted);
   };

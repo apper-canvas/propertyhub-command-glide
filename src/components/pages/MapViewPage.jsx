@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import ApperIcon from "@/components/ApperIcon";
@@ -12,7 +12,6 @@ import { propertyService } from "@/services/api/propertyService";
 import { savedService } from "@/services/api/savedService";
 import { formatPrice, formatSquareFeet, getPropertyTypeLabel } from "@/utils/formatters";
 import { toast } from "react-toastify";
-
 const MapViewPage = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -41,11 +40,14 @@ const MapViewPage = () => {
       }
       setProperties(data);
       
-      if (data.length > 0) {
-        // Calculate center based on properties
-        const avgLat = data.reduce((sum, p) => sum + p.coordinates.lat, 0) / data.length;
-        const avgLng = data.reduce((sum, p) => sum + p.coordinates.lng, 0) / data.length;
-        setMapCenter({ lat: avgLat, lng: avgLng });
+if (data?.length > 0) {
+        // Calculate center based on properties with null safety
+        const validProperties = data.filter(p => p?.coordinates?.lat && p?.coordinates?.lng);
+        if (validProperties.length > 0) {
+          const avgLat = validProperties.reduce((sum, p) => sum + p.coordinates.lat, 0) / validProperties.length;
+          const avgLng = validProperties.reduce((sum, p) => sum + p.coordinates.lng, 0) / validProperties.length;
+          setMapCenter({ lat: avgLat, lng: avgLng });
+        }
       }
     } catch (err) {
       setError("Failed to load properties. Please try again.");
@@ -64,18 +66,20 @@ const MapViewPage = () => {
     }
   };
 
-  const handleSearch = (query) => {
-    if (query.trim()) {
+const handleSearch = useCallback((query) => {
+    if (query?.trim()) {
       setFilters(prev => ({ ...prev, query: query.trim() }));
     } else {
-      const { query, ...rest } = filters;
-      setFilters(rest);
+      setFilters(prev => {
+        const { query, ...rest } = prev;
+        return rest;
+      });
     }
-  };
+  }, []);
 
-  const handleApplyFilters = (newFilters) => {
-    setFilters(newFilters);
-  };
+  const handleApplyFilters = useCallback((newFilters) => {
+    setFilters(newFilters || {});
+  }, []);
 
   const handleSaveProperty = async (propertyId) => {
     try {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import SearchBar from "@/components/molecules/SearchBar";
 import FilterPanel from "@/components/molecules/FilterPanel";
@@ -11,7 +11,6 @@ import Badge from "@/components/atoms/Badge";
 import { propertyService } from "@/services/api/propertyService";
 import { savedService } from "@/services/api/savedService";
 import { toast } from "react-toastify";
-
 const BrowsePage = () => {
   const [filters, setFilters] = useState({});
   const [showFilters, setShowFilters] = useState(false);
@@ -44,21 +43,24 @@ const BrowsePage = () => {
       console.error("Error loading saved properties:", err);
     }
   };
-
-  const handleSearch = (query) => {
-    if (query.trim()) {
+const handleSearch = useCallback((query) => {
+    if (query?.trim()) {
       setFilters(prev => ({ ...prev, query: query.trim() }));
     } else {
-      const { query, ...rest } = filters;
-      setFilters(rest);
+      setFilters(prev => {
+        const { query, ...rest } = prev;
+        return rest;
+      });
     }
-  };
+  }, []);
 
-  const handleApplyFilters = (newFilters) => {
-    setFilters(newFilters);
-  };
+  const handleApplyFilters = useCallback((newFilters) => {
+    setFilters(newFilters || {});
+  }, []);
 
-  const handleSaveProperty = async (propertyId) => {
+const handleSaveProperty = useCallback(async (propertyId) => {
+    if (!propertyId) return;
+    
     try {
       const isSaved = savedProperties.includes(propertyId);
       
@@ -75,7 +77,7 @@ const BrowsePage = () => {
       toast.error("Failed to update saved properties");
       console.error("Error saving property:", err);
     }
-  };
+  }, [savedProperties]);
 
   const getActiveFiltersCount = () => {
     return Object.keys(filters).length;
