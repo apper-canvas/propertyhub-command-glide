@@ -9,11 +9,11 @@ import MapViewPage from "@/components/pages/MapViewPage";
 import PropertyDetailPage from "@/components/pages/PropertyDetailPage";
 import SavedPropertiesPage from "@/components/pages/SavedPropertiesPage";
 import SavedSearchesPage from "@/components/pages/SavedSearchesPage";
+import TasksPage from "@/components/pages/TasksPage";
 import Login from '@/components/pages/Login';
 import Signup from '@/components/pages/Signup';
 import Callback from '@/components/pages/Callback';
 import ErrorPage from '@/components/pages/ErrorPage';
-
 export const AuthContext = createContext(null);
 
 function AppContent() {
@@ -141,6 +141,11 @@ function AppContent() {
         <Route path="/saved-searches" element={
           <Layout>
             <SavedSearchesPage />
+          </Layout>
+} />
+        <Route path="/tasks" element={
+          <Layout>
+            <TasksPage />
           </Layout>
         } />
       </Routes>

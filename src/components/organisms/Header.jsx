@@ -10,10 +10,11 @@ const Header = () => {
   const location = useLocation();
 
   const navigation = [
-    { name: "Browse Properties", href: "/", icon: "Home" },
+{ name: "Browse Properties", href: "/", icon: "Home" },
     { name: "Map View", href: "/map", icon: "Map" },
     { name: "Saved Searches", href: "/saved-searches", icon: "Search" },
     { name: "Saved Properties", href: "/saved-properties", icon: "Heart" },
+    { name: "Tasks", href: "/tasks", icon: "CheckCircle" },
   ];
 
   const isActive = (path) => location.pathname === path;
