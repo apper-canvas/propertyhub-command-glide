@@ -1,0 +1,212 @@
+[
+  {
+    "Id": 1,
+    "title": "Modern Luxury Condo with City Views",
+    "price": 750000,
+    "address": "123 Downtown Ave, Metropolitan City, NY 10001",
+    "coordinates": { "lat": 40.7128, "lng": -74.0060 },
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "squareFeet": 1200,
+    "propertyType": "condo",
+    "featured": true,
+    "images": [
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&h=600&fit=crop"
+    ],
+    "description": "Stunning modern condo featuring floor-to-ceiling windows with breathtaking city views. This luxurious unit boasts high-end finishes throughout, including hardwood floors, granite countertops, and stainless steel appliances. The open-concept living space is perfect for entertaining, while the master suite offers a private retreat with an en-suite bathroom.",
+    "amenities": ["Gym", "Pool", "Concierge", "Rooftop Deck", "Parking", "Pet Friendly"],
+    "yearBuilt": 2018,
+    "listingDate": "2024-01-15T00:00:00Z"
+  },
+  {
+    "Id": 2,
+    "title": "Charming Victorian House with Garden",
+    "price": 850000,
+    "address": "456 Oak Street, Historic District, NY 10002",
+    "coordinates": { "lat": 40.7200, "lng": -73.9900 },
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "squareFeet": 2400,
+    "propertyType": "house",
+    "featured": true,
+    "images": [
+      "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop"
+    ],
+    "description": "Beautiful Victorian home featuring original architectural details including crown molding, hardwood floors, and bay windows. The spacious layout includes a formal dining room, updated kitchen with modern appliances, and a lovely backyard garden perfect for outdoor entertaining. Located in a quiet historic neighborhood.",
+    "amenities": ["Garden", "Fireplace", "Hardwood Floors", "Updated Kitchen", "Historic Details"],
+    "yearBuilt": 1895,
+    "listingDate": "2024-01-18T00:00:00Z"
+  },
+  {
+    "Id": 3,
+    "title": "Spacious Family Townhouse",
+    "price": 680000,
+    "address": "789 Maple Lane, Suburban Heights, NY 10003",
+    "coordinates": { "lat": 40.7400, "lng": -73.9800 },
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "squareFeet": 1800,
+    "propertyType": "townhouse",
+    "featured": false,
+    "images": [
+      "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop"
+    ],
+    "description": "Perfect family townhouse in a quiet residential area. Features an open floor plan on the main level, three bedrooms upstairs, and a finished basement for additional living space. The private backyard is ideal for children and pets. Close to schools, parks, and shopping.",
+    "amenities": ["Garage", "Basement", "Backyard", "Near Schools", "Quiet Neighborhood"],
+    "yearBuilt": 2005,
+    "listingDate": "2024-01-20T00:00:00Z"
+  },
+  {
+    "Id": 4,
+    "title": "Downtown Studio Apartment",
+    "price": 420000,
+    "address": "321 City Center Blvd, Downtown Core, NY 10004",
+    "coordinates": { "lat": 40.7080, "lng": -74.0100 },
+    "bedrooms": 1,
+    "bathrooms": 1,
+    "squareFeet": 650,
+    "propertyType": "apartment",
+    "featured": false,
+    "images": [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop"
+    ],
+    "description": "Efficient studio apartment in the heart of downtown. Features modern amenities, large windows for natural light, and an open layout that maximizes space. Building amenities include fitness center, rooftop terrace, and 24/7 concierge. Walking distance to public transportation and entertainment.",
+    "amenities": ["Fitness Center", "Rooftop Terrace", "Concierge", "Transportation Access"],
+    "yearBuilt": 2020,
+    "listingDate": "2024-01-22T00:00:00Z"
+  },
+  {
+    "Id": 5,
+    "title": "Luxury Penthouse with Panoramic Views",
+    "price": 1950000,
+    "address": "555 Skyline Drive, Premium Heights, NY 10005",
+    "coordinates": { "lat": 40.7300, "lng": -73.9700 },
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "squareFeet": 2800,
+    "propertyType": "condo",
+    "featured": true,
+    "images": [
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop"
+    ],
+    "description": "Extraordinary penthouse offering panoramic city and water views from every room. This sophisticated residence features premium finishes, a gourmet kitchen with top-of-the-line appliances, and a private terrace perfect for entertaining. The master suite includes a spa-like bathroom and walk-in closet.",
+    "amenities": ["Private Terrace", "Premium Finishes", "Spa Bathroom", "Concierge", "Valet Parking", "Wine Storage"],
+    "yearBuilt": 2021,
+    "listingDate": "2024-01-10T00:00:00Z"
+  },
+  {
+    "Id": 6,
+    "title": "Cozy Cottage with Character",
+    "price": 525000,
+    "address": "888 Garden Path, Cottage Grove, NY 10006",
+    "coordinates": { "lat": 40.7600, "lng": -73.9600 },
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "squareFeet": 1000,
+    "propertyType": "house",
+    "featured": false,
+    "images": [
+      "https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1500076656116-558758c991c1?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1472224371017-08207f84aaae?w=800&h=600&fit=crop"
+    ],
+    "description": "Charming cottage home with lots of character and charm. Features original hardwood floors, exposed beams, and a cozy fireplace. The updated kitchen opens to a sunny dining area, and the bedrooms are bright and airy. Large backyard with mature trees provides privacy and tranquility.",
+    "amenities": ["Fireplace", "Hardwood Floors", "Large Backyard", "Character Features", "Quiet Street"],
+    "yearBuilt": 1950,
+    "listingDate": "2024-01-25T00:00:00Z"
+  },
+  {
+    "Id": 7,
+    "title": "Modern Waterfront Condo",
+    "price": 1250000,
+    "address": "777 Harbor View, Waterfront District, NY 10007",
+    "coordinates": { "lat": 40.6900, "lng": -74.0200 },
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "squareFeet": 1400,
+    "propertyType": "condo",
+    "featured": true,
+    "images": [
+      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1600585152915-d208bec867a1?w=800&h=600&fit=crop"
+    ],
+    "description": "Stunning waterfront condo with unobstructed water views and modern amenities. Floor-to-ceiling windows showcase the beautiful harbor, while the open layout creates a seamless flow between living spaces. The building offers resort-style amenities and is walking distance to restaurants and entertainment.",
+    "amenities": ["Water Views", "Resort Amenities", "Fitness Center", "Pool", "Marina Access", "Concierge"],
+    "yearBuilt": 2019,
+    "listingDate": "2024-01-12T00:00:00Z"
+  },
+  {
+    "Id": 8,
+    "title": "Renovated Brownstone",
+    "price": 1100000,
+    "address": "999 Heritage Row, Historic Brownstone District, NY 10008",
+    "coordinates": { "lat": 40.7500, "lng": -73.9500 },
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "squareFeet": 2200,
+    "propertyType": "townhouse",
+    "featured": false,
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1600566753151-384129cf4e3e?w=800&h=600&fit=crop"
+    ],
+    "description": "Beautifully renovated brownstone combining historic charm with modern conveniences. Features original details like medallion ceilings and pocket doors, plus a fully updated kitchen and bathrooms. Three floors of living space include a garden level with separate entrance, perfect for rental income or home office.",
+    "amenities": ["Historic Details", "Rental Potential", "Updated Systems", "Garden Level", "Original Features"],
+    "yearBuilt": 1890,
+    "listingDate": "2024-01-28T00:00:00Z"
+  },
+  {
+    "Id": 9,
+    "title": "Contemporary Loft Space",
+    "price": 890000,
+    "address": "444 Industrial Way, Arts District, NY 10009",
+    "coordinates": { "lat": 40.7150, "lng": -73.9950 },
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "squareFeet": 1600,
+    "propertyType": "condo",
+    "featured": false,
+    "images": [
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1600563438938-a42a4e4cd5d8?w=800&h=600&fit=crop"
+    ],
+    "description": "Spacious contemporary loft in vibrant arts district. Features soaring ceilings, exposed brick walls, and oversized windows that flood the space with natural light. The open layout is perfect for both living and working, with a modern kitchen and stylish finishes throughout. Walking distance to galleries and trendy restaurants.",
+    "amenities": ["High Ceilings", "Exposed Brick", "Arts District", "Modern Kitchen", "Gallery Access"],
+    "yearBuilt": 2010,
+    "listingDate": "2024-02-01T00:00:00Z"
+  },
+  {
+    "Id": 10,
+    "title": "Suburban Family Home",
+    "price": 625000,
+    "address": "222 Elm Street, Family Friendly Suburbs, NY 10010",
+    "coordinates": { "lat": 40.7800, "lng": -73.9400 },
+    "bedrooms": 4,
+    "bathrooms": 2,
+    "squareFeet": 2000,
+    "propertyType": "house",
+    "featured": false,
+    "images": [
+      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800&h=600&fit=crop"
+    ],
+    "description": "Perfect family home in desirable suburban neighborhood. Features four bedrooms, two full bathrooms, and an eat-in kitchen that opens to the family room. The finished basement provides additional living space, and the large backyard is ideal for children and entertaining. Top-rated school district.",
+    "amenities": ["Family Room", "Finished Basement", "Large Backyard", "Top Schools", "Quiet Neighborhood"],
+    "yearBuilt": 1985,
+    "listingDate": "2024-02-03T00:00:00Z"
+  }
+]

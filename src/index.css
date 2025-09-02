@@ -1,0 +1,57 @@
+@import 'react-toastify/dist/ReactToastify.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+}
+
+.Toastify__toast {
+  @apply rounded-lg shadow-lg border border-gray-100;
+  font-size: 14px;
+  min-height: 56px;
+}
+
+.Toastify__toast--success {
+  @apply bg-white text-gray-900 border-success/20;
+}
+
+.Toastify__toast--error {
+  @apply bg-white text-gray-900 border-error/20;
+}
+
+.Toastify__toast--info {
+  @apply bg-white text-gray-900 border-info/20;
+}
+
+.Toastify__progress-bar {
+  @apply bg-gradient-to-r from-primary to-accent;
+}
+
+.property-card {
+  transition: all 0.2s ease-out;
+}
+
+.property-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.15);
+}
+
+.filter-panel {
+  transition: all 0.25s ease-in-out;
+}
+
+.image-gallery {
+  transition: opacity 0.15s ease-in-out;
+}
+
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
