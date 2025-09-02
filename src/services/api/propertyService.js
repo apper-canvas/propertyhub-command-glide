@@ -16,6 +16,8 @@ const tableName = 'property_c';
 
 export const propertyService = {
   async getAll() {
+// Export individual functions for easier importing
+export const getAllProperties = propertyService.getAll;
     try {
       const client = initializeClient();
       const params = {
