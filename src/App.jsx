@@ -1,25 +1,149 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createContext, useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from "react-toastify";
+import { setUser, clearUser } from './store/userSlice';
 import Layout from "@/components/organisms/Layout";
 import BrowsePage from "@/components/pages/BrowsePage";
 import MapViewPage from "@/components/pages/MapViewPage";
 import PropertyDetailPage from "@/components/pages/PropertyDetailPage";
 import SavedPropertiesPage from "@/components/pages/SavedPropertiesPage";
 import SavedSearchesPage from "@/components/pages/SavedSearchesPage";
+import Login from '@/components/pages/Login';
+import Signup from '@/components/pages/Signup';
+import Callback from '@/components/pages/Callback';
+import ErrorPage from '@/components/pages/ErrorPage';
 
-function App() {
+export const AuthContext = createContext(null);
+
+function AppContent() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [isInitialized, setIsInitialized] = useState(false);
+  
+  const userState = useSelector((state) => state.user);
+  const isAuthenticated = userState?.isAuthenticated || false;
+  
+  useEffect(() => {
+    const { ApperClient, ApperUI } = window.ApperSDK;
+    
+    const client = new ApperClient({
+      apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+      apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+    });
+    
+    ApperUI.setup(client, {
+      target: '#authentication',
+      clientId: import.meta.env.VITE_APPER_PROJECT_ID,
+      view: 'both',
+      onSuccess: function (user) {
+        setIsInitialized(true);
+        let currentPath = window.location.pathname + window.location.search;
+        let redirectPath = new URLSearchParams(window.location.search).get('redirect');
+        const isAuthPage = currentPath.includes('/login') || currentPath.includes('/signup') || 
+                           currentPath.includes('/callback') || currentPath.includes('/error');
+        
+        if (user) {
+          if (redirectPath) {
+            navigate(redirectPath);
+          } else if (!isAuthPage) {
+            if (!currentPath.includes('/login') && !currentPath.includes('/signup')) {
+              navigate(currentPath);
+            } else {
+              navigate('/');
+            }
+          } else {
+            navigate('/');
+          }
+          dispatch(setUser(JSON.parse(JSON.stringify(user))));
+        } else {
+          if (!isAuthPage) {
+            navigate(
+              currentPath.includes('/signup')
+                ? `/signup?redirect=${currentPath}`
+                : currentPath.includes('/login')
+                ? `/login?redirect=${currentPath}`
+                : '/login'
+            );
+          } else if (redirectPath) {
+            if (
+              !['error', 'signup', 'login', 'callback'].some((path) => currentPath.includes(path))
+            ) {
+              navigate(`/login?redirect=${redirectPath}`);
+            } else {
+              navigate(currentPath);
+            }
+          } else if (isAuthPage) {
+            navigate(currentPath);
+          } else {
+            navigate('/login');
+          }
+          dispatch(clearUser());
+        }
+      },
+      onError: function(error) {
+        console.error("Authentication failed:", error);
+      }
+    });
+  }, []);
+  
+  const authMethods = {
+    isInitialized,
+    logout: async () => {
+      try {
+        const { ApperUI } = window.ApperSDK;
+        await ApperUI.logout();
+        dispatch(clearUser());
+        navigate('/login');
+      } catch (error) {
+        console.error("Logout failed:", error);
+      }
+    }
+  };
+  
+  if (!isInitialized) {
+    return (
+      <div className="loading flex items-center justify-center p-6 h-full w-full">
+        <svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2v4"></path><path d="m16.2 7.8 2.9-2.9"></path><path d="M18 12h4"></path><path d="m16.2 16.2 2.9 2.9"></path><path d="M12 18v4"></path><path d="m4.9 19.1 2.9-2.9"></path><path d="M2 12h4"></path><path d="m4.9 4.9 2.9 2.9"></path>
+        </svg>
+      </div>
+    );
+  }
+  
   return (
-    <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<BrowsePage />} />
-          <Route path="/map" element={<MapViewPage />} />
-          <Route path="/property/:id" element={<PropertyDetailPage />} />
-          <Route path="/saved-properties" element={<SavedPropertiesPage />} />
-          <Route path="/saved-searches" element={<SavedSearchesPage />} />
-        </Routes>
-      </Layout>
+    <AuthContext.Provider value={authMethods}>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/callback" element={<Callback />} />
+        <Route path="/error" element={<ErrorPage />} />
+        <Route path="/" element={
+          <Layout>
+            <BrowsePage />
+          </Layout>
+        } />
+        <Route path="/map" element={
+          <Layout>
+            <MapViewPage />
+          </Layout>
+        } />
+        <Route path="/property/:id" element={
+          <Layout>
+            <PropertyDetailPage />
+          </Layout>
+        } />
+        <Route path="/saved-properties" element={
+          <Layout>
+            <SavedPropertiesPage />
+          </Layout>
+        } />
+        <Route path="/saved-searches" element={
+          <Layout>
+            <SavedSearchesPage />
+          </Layout>
+        } />
+      </Routes>
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -33,6 +157,14 @@ function App() {
         className="z-[9999]"
         toastClassName="shadow-card-hover"
       />
+    </AuthContext.Provider>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }
