@@ -21,7 +21,7 @@ export const formatDate = (date) => {
 
 export const truncateText = (text, maxLength = 150) => {
   if (text.length <= maxLength) return text;
-  return text.substr(0, maxLength).trim() + "...";
+  return text.substring(0, maxLength).trim() + "...";
 };
 
 export const getPropertyTypeLabel = (type) => {

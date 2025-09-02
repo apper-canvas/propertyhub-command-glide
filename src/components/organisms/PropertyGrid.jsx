@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { propertyService } from "@/services/api/propertyService";
 import { savedService } from "@/services/api/savedService";
@@ -21,10 +21,6 @@ useEffect(() => {
     loadProperties();
     loadSavedProperties();
   }, [filters]);
-
-  useEffect(() => {
-    sortProperties();
-  }, [sortBy]);
 
   const loadProperties = async () => {
     setLoading(true);
@@ -55,8 +51,9 @@ useEffect(() => {
     }
   };
 
-const sortProperties = () => {
-    if (!properties || properties.length === 0) return;
+// Use useMemo to prevent infinite loops - automatically recalculates when dependencies change
+  const sortedProperties = useMemo(() => {
+    if (!properties || properties.length === 0) return [];
     
     const sorted = [...properties];
     
@@ -81,10 +78,10 @@ const sortProperties = () => {
           return dateB - dateA;
         });
         break;
-}
+    }
     
-    setProperties(sorted);
-  };
+    return sorted;
+  }, [properties, sortBy]);
 
   const handleSaveProperty = async (propertyId) => {
     try {
